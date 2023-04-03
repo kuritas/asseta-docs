@@ -1,44 +1,47 @@
 site_name: Asseta Docs
 theme:
-  name: material
+    name: material
+    language: zh
+    features:
+        - navigation.tabs
 
 markdown_extensions:
-  - admonition
-  - codehilite:
-      guess_lang: false
-      linenums: false
-  - toc:
-      permalink: true
-  - footnotes
-  - meta
-  - def_list
-  - pymdownx.arithmatex
-  - pymdownx.betterem:
-      smart_enable: all
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_png
-  - pymdownx.inlinehilite
-  - pymdownx.magiclink
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tasklist
-  - pymdownx.tilde
+    - admonition
+    - codehilite:
+        guess_lang: false
+        linenums: false
+    - toc:
+        permalink: true
+    - footnotes
+    - meta
+    - def_list
+    - pymdownx.arithmatex
+    - pymdownx.betterem:
+        smart_enable: all
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.details
+    - pymdownx.emoji:
+        emoji_generator: !!python/name:pymdownx.emoji.to_png
+    - pymdownx.inlinehilite
+    - pymdownx.magiclink
+    - pymdownx.mark
+    - pymdownx.smartsymbols
+    - pymdownx.superfences
+    - pymdownx.tasklist
+    - pymdownx.tilde
 
 nav:
-  - 介绍: index.md
-  - API:
-      - API: API/API.md
-      - User: API/user.md
-      - Company: API/company.md
-      - Department: API/department.md
-      - Asset: API/asset.md
-      - Category: API/category.md
-  - git规范:
-      - git: git/git.md
-      - 需求: git/require.md
-  - 后端:
-      - Models: backend/models.md
+    - 介绍: index.md
+    - API:
+        - API: API/API.md
+        - User: API/user.md
+        - Company: API/company.md
+        - Department: API/department.md
+        - Asset: API/asset.md
+        - Category: API/category.md
+    - git规范:
+        - git: git/git.md
+        - 需求: git/require.md
+    - 后端:
+        - Models: backend/models.md

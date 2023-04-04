@@ -62,7 +62,7 @@ Success
 ```json
 {
 	"token": "",
-    "name": "",
+    "new_name": "",
     "uuid": "",
 }
 Success

@@ -4,6 +4,21 @@ theme:
     language: zh
     features:
         - navigation.tabs
+        - navigation.top
+        - navigation.indexes
+
+extra_javascript:
+    - 'https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+
+plugins:
+    - search
+    - glightbox
+    - git-revision-date-localized:
+        fallback_to_build_date: true
+        locale: zh
+    - git-authors:
+        show_contribution: true
+        show_line_count: true
 
 markdown_extensions:
     - admonition
@@ -21,8 +36,8 @@ markdown_extensions:
     - pymdownx.caret
     - pymdownx.critic
     - pymdownx.details
-    - pymdownx.emoji:
-        emoji_generator: !!python/name:pymdownx.emoji.to_png
+    # - pymdownx.emoji:
+    #     emoji_generator: !!python/name:pymdownx.emoji.to_png
     - pymdownx.inlinehilite
     - pymdownx.magiclink
     - pymdownx.mark
@@ -34,7 +49,7 @@ markdown_extensions:
 nav:
     - 介绍: index.md
     - API:
-        - API: API/API.md
+        - API/API.md
         - User: API/user.md
         - Company: API/company.md
         - Department: API/department.md

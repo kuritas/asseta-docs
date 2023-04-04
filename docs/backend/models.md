@@ -45,6 +45,7 @@ department: foreignfield
 count: number 如果is_distinct，只能是1；否则是>=0的整数
 is_distinct: boolean 是否是数量限定为1的资产
 category: foreignfield
+custom_attributes: JSONfield
 
 ```
 

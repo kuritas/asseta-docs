@@ -49,7 +49,7 @@ Fault
 {
 	"token": "",
 	"filter": { // optional
-		"category": "",
+		"category_uuid": "",
 		"asset_name_contains": "", // 搜子串
 		"status": "",
 		"user": ""

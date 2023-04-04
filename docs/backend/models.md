@@ -55,7 +55,11 @@ category: foreignfield
 ```
     name = models.CharField(max_length=50, unique=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-    uuid :
+    # 请注意，这里的parent是这个库要求的，不能改成father
+    uuid = uuidfield
+    modified_by = ForeignField(User)
+    modified_at = DateTimeField()
+    #重命名、创建会更新这两个字段
     
     class MPTTMeta:
         order_insertion_by = ['name']

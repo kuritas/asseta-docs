@@ -10,12 +10,26 @@
 {
 	"token": "",
 	"asset_list": [
-		"name": "",
-		"description": "",
-		"department_uuid": "",
-		"category_uuid": "",
-		"is_distinct": boolean,
-		"count": number
+		{
+			"name": "", // 0 < len <= 128
+			"description": "", // optional, default is "", 0 <= len <= 1024
+			"department_uuid": "",
+			"category_uuid": "",
+			"children": [
+				{
+					"name": "", // 0 < len <= 128
+					"description": "", // optional, default is "", 0 <= len <= 1024
+					"department_uuid": "",
+					"category_uuid": "",
+					"children": [],
+					"is_distinct": boolean,
+					"count": number
+				}
+			],
+			"is_distinct": boolean,
+			"count": number // non-negative integer, optional, default is 1, 
+					            // must not exceed 1 when is_distinct is True
+		}
 	]
 }
 Success
@@ -49,7 +63,7 @@ Fault
 {
 	"token": "",
 	"filter": { // optional
-		"category": "",
+		"category_uuid": "",
 		"asset_name_contains": "", // 搜子串
 		"status": "",
 		"user": ""

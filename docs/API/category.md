@@ -122,7 +122,7 @@ Success
         {
             "name": "",
             "uuid": "",
-            "father_uuid": "",
+            "father_uuid": "",  # dummy's father_uuid = ""
             "created_by": "username",
             "created_at": "time", # 标准格式，如"2009-06-15T13:45:30"，UTC时区
         }

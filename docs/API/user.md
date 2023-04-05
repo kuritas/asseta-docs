@@ -109,6 +109,8 @@ Success
 		"username": "",
 		"department_list_name": [""],
 		"company_uuid": "",
+		"department_uuid": "",
+		# 对于超管，list为空，两个uuid为空串
 		"is_superadmin": bool,
 		"is_useradmin": bool,
 		"is_assetadmin": bool
@@ -383,6 +385,8 @@ Success
 			"username": "",
 			"department_list_name": [""],
 			"company_uuid": "",
+			"department_uuid": "",
+			# 对于超管，list为空，两个uuid为空串
 			"is_superadmin": bool,
 			"is_useradmin": bool,
 			"is_assetadmin": bool

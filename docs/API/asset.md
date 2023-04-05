@@ -10,13 +10,26 @@
 {
 	"token": "",
 	"asset_list": [
-		"name": "", // 0 < len <= 128
-		"description": "", // optional, default is "", 0 <= len <= 1024
-		"department_uuid": "",
-		"category_uuid": "",
-		"is_distinct": boolean,
-		"count": number // non-negative integer, optional, default is 1, 
-		// must not exceed 1 when is_distinct is True
+		{
+			"name": "", // 0 < len <= 128
+			"description": "", // optional, default is "", 0 <= len <= 1024
+			"department_uuid": "",
+			"category_uuid": "",
+			"children": [
+				{
+					"name": "", // 0 < len <= 128
+					"description": "", // optional, default is "", 0 <= len <= 1024
+					"department_uuid": "",
+					"category_uuid": "",
+					"children": [],
+					"is_distinct": boolean,
+					"count": number
+				}
+			],
+			"is_distinct": boolean,
+			"count": number // non-negative integer, optional, default is 1, 
+					            // must not exceed 1 when is_distinct is True
+		}
 	]
 }
 Success

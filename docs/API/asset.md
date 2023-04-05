@@ -15,7 +15,8 @@
 		"department_uuid": "",
 		"category_uuid": "",
 		"is_distinct": boolean,
-		"count": number // optional, default is 1
+		"count": number // non-negative integer, optional, default is 1, 
+		// must not exceed 1 when is_distinct is True
 	]
 }
 Success

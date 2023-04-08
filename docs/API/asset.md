@@ -52,6 +52,7 @@ Fault
 * 权限不足：`code = 3, message = "no access"`
 * 部门不存在： `code = 10, message = "invalid department"`
 * 类别不存在： `code = 11, message = "invalid category"`
+* 子资产和父资产部门不同：`code = 30, message = "different departments between parent&child"`
 
 #### /asset/search
 

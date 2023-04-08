@@ -33,11 +33,12 @@ expires : DateTimeField(default=timezone.now() + timedelta(days=1))
 
 ```
 
-#### Asset
+#### Asset(MPTTModel)
 
 ```
 uuid       :
 name       : 
+parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 description:
 status : enum { IDLE, IN_USE, IN_MAINTAIN, RETIRED, DELETED }
 username  : nullable, foreignfield

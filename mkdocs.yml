@@ -12,13 +12,13 @@ extra_javascript:
 
 plugins:
     - search
-    - glightbox
-    - git-revision-date-localized:
-        fallback_to_build_date: true
-        locale: zh
-    - git-authors:
-        show_contribution: true
-        show_line_count: true
+    # - glightbox
+    # - git-revision-date-localized:
+    #     fallback_to_build_date: true
+    #     locale: zh
+    # - git-authors:
+    #     show_contribution: true
+    #     show_line_count: true
 
 markdown_extensions:
     - admonition
@@ -49,14 +49,16 @@ markdown_extensions:
 nav:
     - 介绍: index.md
     - API:
-        - API/API.md
+        - API/index.md
         - User: API/user.md
         - Company: API/company.md
         - Department: API/department.md
         - Asset: API/asset.md
         - Category: API/category.md
     - git规范:
-        - git: git/git.md
-        - 需求: git/require.md
+        - git/index.md
     - 后端:
         - Models: backend/models.md
+    - 需求:
+        - 需求列表: requirement/requirement.md
+        - 工单列表: requirement/ticket.md

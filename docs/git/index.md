@@ -1,3 +1,5 @@
+# git
+
 #### commit 规范
 
 `[x-y]<type>: <message>(#issue)`
@@ -42,5 +44,4 @@
 * fix:      修改bug
 
 ```
-
 

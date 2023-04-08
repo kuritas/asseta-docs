@@ -11,17 +11,17 @@
 	"token": "",
 	"asset_list": [
 		{
-			"name": "", // 0 < len <= 128
+			"name": "", // 0 < len <= 32
 			"description": "", // optional, default is "", 0 <= len <= 1024
 			"department_uuid": "",
 			"category_uuid": "",
 			"children": [
 				{
-					"name": "", // 0 < len <= 128
+					"name": "", // 0 < len <= 32
 					"description": "", // optional, default is "", 0 <= len <= 1024
-					"department_uuid": "",
+					"department_uuid": "", // must the same as father's department
 					"category_uuid": "",
-					"children": [],
+					"children": [], // empty
 					"is_distinct": boolean,
 					"count": number
 				}
@@ -57,7 +57,7 @@ Fault
 
 查询资产列表
 
-权限 user 仅限本公司
+权限：仅限本业务实体
 
 ```json
 {
@@ -67,8 +67,8 @@ Fault
 		"asset_name_contains": "", // 搜子串
 		"status": "",
 		"user": ""
-	}
-	"numberperpage": number // optional, None for 50, Max = 50
+	},
+	"numberperpage": number, // optional, None for 50, Max = 50
 	"pagenumber": number // optional, None for 1
 }
 Success
@@ -79,7 +79,7 @@ Success
 		{
 			"uuid": "",
 			"name": "",
-			"status": "", ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED "]
+			"status": "", // ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED"]
 			"username": "",
 			"department_name": "",
 			"department_uuid": "",
@@ -90,11 +90,65 @@ Success
 		}
 	]
 }
-Fault{
+Fault
+{
 	"code": *,
 	"info": message
 }
 
 ```
 
+错误类型：
+
+* token不存在：`code = 1, message = "invalid token"`
+* token超时：`code = 2, message = "token expired"`
+
+#### /asset/info
+
+查询资产详细信息
+
+权限：仅限本业务实体
+
+```json
+{
+    "token": "",
+    "asset_uuid": ""
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "data": {
+     	“name”: "",
+    	"description": "",
+        "username": "", // 挂账人
+        “status”: "", // ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED"]
+		"department_uuid": [""],   // from root
+        "department_name": [""],   // from root
+		"category_uuid": [""],     // from root
+        "category_name": [""],     // from root
+        "is_distinct": boolean,
+        "count": number,
+        “father_uuid”: "", // return "" if no father
+        "father_name": "", // return "" if no father
+        "children": [ // 所有的附属资产
+            {
+                "uuid": "",
+                "name": "",
+            }
+        ]
+    }
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+
+* token不存在：`code = 1, message = "invalid token"`
+* token超时：`code = 2, message = "token expired"`
+* uuid 无效，包括查询到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 

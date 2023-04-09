@@ -98,3 +98,34 @@ Fault
 * 部门不存在： `code = 10, message = "invalid uuid"`
 
 
+#### department/get_self_company
+
+（仅作数据库过渡用）
+
+需求权限：superadmin
+
+```json
+POST
+{
+	"token": "",
+	"uuid": "",
+	"new_name": ""
+}
+Success
+{
+	"code": 0,
+	"info": "Succeed"
+}
+Fault
+{
+	"code": *,
+	"info": message
+}
+
+```
+
+错误类型：
+
+* token不存在：`code = 1, message = "invalid token"`
+* token超时：`code = 2, message = "token expired"`
+* 权限不足：`code = 3, message = "no access"`

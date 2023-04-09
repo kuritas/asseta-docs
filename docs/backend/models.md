@@ -54,14 +54,15 @@ custom_attributes: JSONfield
 
 <https://django-mptt.readthedocs.io/en/latest/tutorial.html> 
 
-```
-    name = models.CharField(max_length=50, unique=True)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+```python
+    name        = models.CharField(max_length=MAX_CATEGORY_NAME_LEN, unique=False)
+    parent      = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     # 请注意，这里的parent是这个库要求的，不能改成father
-    uuid = uuidfield
-    modified_by = ForeignField(User)
-    modified_at = DateTimeField()
+    uuid        = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
+    modified_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    modified_at = models.DateTimeField(auto_now=True)
     #重命名、创建会更新这两个字段
+    company     = models.ForeignKey(Department, on_delete=models.CASCADE)   
     
     class MPTTMeta:
         order_insertion_by = ['name']

@@ -67,7 +67,7 @@ Fault
 		"category_uuid": "",
 		"asset_name_contains": "", // 搜子串
 		"status": "",
-		"user": ""
+		"username": ""
 	},
 	"numberperpage": number, // optional, None for 50, Max = 50
 	"pagenumber": number // optional, None for 1
@@ -103,6 +103,8 @@ Fault
 
 * token不存在：`code = 1, message = "invalid token"`
 * token超时：`code = 2, message = "token expired"`
+* 类别不存在： `code = 11, message = "invalid category"`
+
 
 #### /asset/info
 
@@ -120,17 +122,17 @@ Success
     "code": 0,
     "info": "Succeed",
     "data": {
-     	“name”: "",
+     	"name": "",
     	"description": "",
         "username": "", // 挂账人
-        “status”: "", // ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED"]
+        "status": "", // ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED"]
 		"department_uuid": [""],   // from root
         "department_name": [""],   // from root
 		"category_uuid": [""],     // from root
         "category_name": [""],     // from root
         "is_distinct": boolean,
         "count": number,
-        “father_uuid”: "", // return "" if no father
+        "father_uuid": "", // return "" if no father
         "father_name": "", // return "" if no father
         "children": [ // 所有的附属资产
             {

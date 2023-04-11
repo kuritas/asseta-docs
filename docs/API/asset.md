@@ -155,3 +155,33 @@ Fault
 * token超时：`code = 2, message = "token expired"`
 * uuid 无效，包括查询到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 
+#### /asset/transfer
+
+子级资产更换父亲（只能从一个资产的附属资产变为另一个资产的附属资产）。
+
+权限：仅限本业务实体。
+
+```json
+{
+    "token": "",
+    "source_uuid": "", // 待转移资产 uuid
+    "target_uuid": ""  // 转移到的父资产的 uuid
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed"
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+
+- token 不存在：`code = 1, message = "invalid token"`
+- token 超时：`code = 2, message = "token expired"`
+- uuid 无效，包括查询到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
+- 待转移资产不是子级资产，或目标资产不是父级资产：`code = 11, message = "invalid source or target asset"`

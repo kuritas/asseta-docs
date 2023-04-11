@@ -128,10 +128,10 @@ Success
     	"description": "",
         "username": "", // 挂账人
         "status": "", // ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED"]
-		"department_uuid": [""],   // from root
-        "department_name": [""],   // from root
-		"category_uuid": [""],     // from root
-        "category_name": [""],     // from root
+		"department_uuids": [""],   // from company
+        "department_names": [""],   // from company
+		"category_uuids": [""],     // from dummy
+        "category_names": [""],     // from dummy
         "is_distinct": boolean,
         "count": number,
         "father_uuid": "", // return "" if no father

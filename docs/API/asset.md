@@ -76,6 +76,8 @@ Success
 {
 	"code": 0,
 	"info": "Succeed",
+	"num_pages": number,
+	"num_items": number,
 	"data": [
 		{
 			"uuid": "",

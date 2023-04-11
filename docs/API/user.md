@@ -372,14 +372,15 @@ POST
 		"department_uuid": "", // optional
 		"username": "" // optional
 	}, // optional
-	"numberperpage": number // optional, None for 50, Max = 50
+	"numberperpage": number, // optional, None for 50, Max = 50
 	"pagenumber": number // optional, None for 1
 }
 Success
 {
 	"code": 0,
 	"info": "Succeed",
-	"number": number,
+	"num_pages": number,
+	"num_items": number,
 	"data": [
 		{
 			"username": "",

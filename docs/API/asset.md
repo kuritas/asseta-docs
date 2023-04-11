@@ -185,3 +185,103 @@ Fault
 - token 超时：`code = 2, message = "token expired"`
 - uuid 无效，包括查询到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 - 待转移资产不是子级资产，或目标资产不是父级资产：`code = 11, message = "invalid source or target asset"`
+
+#### /asset/apply
+
+员工申请资产，创建申请工单
+
+权限：仅限员工申请当前业务实体的资产
+
+```json
+{
+	"token": "",
+    "asset_uuid": ""
+}
+Success
+{
+    "code": 0,
+    "info": message
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+
+- token 不存在：`code = 1, message = "invalid token"`
+- token 超时：`code = 2, message = "token expired"`
+- uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
+- 资产当前处于不可申请状态：`code = 11, message = "asset cannot apply"`
+
+#### /asset/maintain
+
+用户提出请求对资产进行维保，创建维保工单
+
+权限：仅限用户提出自己的资产
+
+```json
+{
+	"token": "",
+    "asset_uuid": ""
+}
+Success
+{
+    "code": 0,
+    "info": message
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+
+- token 不存在：`code = 1, message = "invalid token"`
+- token 超时：`code = 2, message = "token expired"`
+- uuid 无效：`code = 10, message = "invalid asset uuid"`
+- 资产不属于自己：`code = 11, message = "asset not belong to you"`
+
+#### /asset/edit
+
+资产管理员修改资产的状态
+
+权限：当前部门的资产管理员
+
+若相关字段不存在意味不进行修改
+
+```json
+{
+	"token": "",
+    "asset_uuid": "",
+    "name": "", // 0 < len <= 32, optional
+    "description": "", // optional, 0 <= len <= 1024
+    "category_uuid": "", // optional
+    "status": "", // ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED"] IDLE means set user=null  ontional
+    "is_distinct": boolean, // optional
+    "count": number // non-negative integer, optional, default is 1, 
+    // must not exceed 1 when is_distinct is True
+}
+Success
+{
+    "code": 0,
+    "info": message
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+
+- token 不存在：`code = 1, message = "invalid token"`
+- token 超时：`code = 2, message = "token expired"`
+- 权限不足，自己非资产管理员或者资产不属于当前部门： `code = 3, message = "no access"`
+- uuid 无效：`code = 10, message = "invalid asset uuid"`
+

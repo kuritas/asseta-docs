@@ -89,7 +89,7 @@ Fault
 错误类型：
 
 - 权限不足：`code = 3, message = "no access"`
-- asset_uuid 本资产不存在（包括资产不可见）： `code = 12, message = "invalid asset_uuid"`
+- asset_uuid 本资产不存在（包括资产不可见）： `code = 10, message = "invalid asset_uuid"`
 - 类别不存在： `code = 11, message = "invalid category"`
 - parent_uuid 父资产不存在（包括资产不可见）： `code = 12, message = "invalid parent_uuid"`
 - 父资产回环（父资产是自己，或者是孙子）：`code = 30, message = "making loop"`

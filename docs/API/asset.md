@@ -59,6 +59,8 @@ Fault
 
 修改指定的资产，只能修改下面列出的字段。如果一个字段不需要修改，就不要传入这个字段。
 
+只能修改空闲资产，修改会使得所有相关待审批工单失效（副作用！）。
+
 权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
 
 ```json
@@ -69,7 +71,7 @@ Fault
 	"name": "", // 0 < len <= 32
 	"description": "", // 0 <= len <= 1024
 	"category_uuid": "",
-	"parent_uuid": "",
+	"parent_uuid": "", // "" to make root, not given to keep the same
 }
 Success
 {
@@ -90,6 +92,8 @@ Fault
 - asset_uuid 本资产不存在（包括资产不可见）： `code = 12, message = "invalid asset_uuid"`
 - 类别不存在： `code = 11, message = "invalid category"`
 - parent_uuid 父资产不存在（包括资产不可见）： `code = 12, message = "invalid parent_uuid"`
+- 父资产回环（父资产是自己，或者是孙子）：`code = 30, message = "making loop"`
+- 只能修改空闲资产： `code = 31, message = "asset is not idle"`
 
 
 #### /asset/search

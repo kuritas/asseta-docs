@@ -1,10 +1,13 @@
 # API_assetss
 
+- token 不存在：`code = 1, message = "invalid token"`
+- token 超时：`code = 2, message = "token expired"`
+
 #### /asset/create
 
 导入资产
 
-权限：assetadmin 权限范围为子树，superadmin/useradmin 不管
+权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
 
 ```json
 {
@@ -47,12 +50,47 @@ Fault
 
 错误类型：
 
-* token不存在：`code = 1, message = "invalid token"`
-* token超时：`code = 2, message = "token expired"`
-* 权限不足：`code = 3, message = "no access"`
-* 部门不存在： `code = 10, message = "invalid department"`
-* 类别不存在： `code = 11, message = "invalid category"`
-* 子资产和父资产部门不同：`code = 30, message = "different departments between parent&child"`
+- 权限不足：`code = 3, message = "no access"`
+- 部门不存在： `code = 10, message = "invalid department"`
+- 类别不存在： `code = 11, message = "invalid category"`
+- 子资产和父资产部门不同：`code = 30, message = "different departments between parent&child"`
+
+#### /asset/modify
+
+修改指定的资产，只能修改下面列出的字段。如果一个字段不需要修改，就不要传入这个字段。
+
+权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
+
+```json
+{
+	"token": "",
+	"asset_uuid": "",
+	// every field below is optional, not given means no change
+	"name": "", // 0 < len <= 32
+	"description": "", // 0 <= len <= 1024
+	"category_uuid": "",
+	"parent_uuid": "",
+}
+Success
+{
+	"code": 0,
+	"info": "Succeed"
+}
+Fault
+{
+	"code": *,
+	"info": message
+}
+
+```
+
+错误类型：
+
+- 权限不足：`code = 3, message = "no access"`
+- asset_uuid 本资产不存在（包括资产不可见）： `code = 12, message = "invalid asset_uuid"`
+- 类别不存在： `code = 11, message = "invalid category"`
+- parent_uuid 父资产不存在（包括资产不可见）： `code = 12, message = "invalid parent_uuid"`
+
 
 #### /asset/search
 
@@ -103,8 +141,6 @@ Fault
 
 错误类型：
 
-* token不存在：`code = 1, message = "invalid token"`
-* token超时：`code = 2, message = "token expired"`
 * 类别不存在： `code = 11, message = "invalid category"`
 
 
@@ -153,9 +189,7 @@ Fault
 
 错误类型：
 
-* token不存在：`code = 1, message = "invalid token"`
-* token超时：`code = 2, message = "token expired"`
-* uuid 无效，包括查询到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
+- uuid 无效，包括查询到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 
 #### /asset/transfer
 
@@ -183,8 +217,6 @@ Fault
 
 错误类型：
 
-- token 不存在：`code = 1, message = "invalid token"`
-- token 超时：`code = 2, message = "token expired"`
 - uuid 无效，包括查询到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 - 待转移资产不是子级资产，或目标资产不是父级资产：`code = 11, message = "invalid source or target asset"`
 
@@ -213,8 +245,6 @@ Fault
 
 错误类型：
 
-- token 不存在：`code = 1, message = "invalid token"`
-- token 超时：`code = 2, message = "token expired"`
 - uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 - 资产当前处于不可申请状态：`code = 11, message = "asset cannot apply"`
 
@@ -243,8 +273,6 @@ Fault
 
 错误类型：
 
-- token 不存在：`code = 1, message = "invalid token"`
-- token 超时：`code = 2, message = "token expired"`
 - uuid 无效：`code = 10, message = "invalid asset uuid"`
 - 资产不属于自己：`code = 11, message = "asset not belong to you"`
 
@@ -282,8 +310,6 @@ Fault
 
 错误类型：
 
-- token 不存在：`code = 1, message = "invalid token"`
-- token 超时：`code = 2, message = "token expired"`
 - 权限不足，自己非资产管理员或者资产不属于当前部门： `code = 3, message = "no access"`
 - uuid 无效：`code = 10, message = "invalid asset uuid"`
 

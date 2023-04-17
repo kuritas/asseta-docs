@@ -280,7 +280,7 @@ Fault
 - uuid 无效：`code = 10, message = "invalid asset uuid"`
 - 资产不属于自己：`code = 11, message = "asset not belong to you"`
 
-#### /asset/edit
+#### /asset/setstatus
 
 资产管理员修改资产的状态
 
@@ -292,13 +292,7 @@ Fault
 {
 	"token": "",
     "asset_uuid": "",
-    "name": "", // 0 < len <= 32, optional
-    "description": "", // optional, 0 <= len <= 1024
-    "category_uuid": "", // optional
     "status": "", // ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED"] IDLE means set user=null  ontional
-    "is_distinct": boolean, // optional
-    "count": number // non-negative integer, optional, default is 1, 
-    // must not exceed 1 when is_distinct is True
 }
 Success
 {

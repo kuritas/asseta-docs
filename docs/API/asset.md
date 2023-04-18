@@ -233,7 +233,8 @@ Fault
 ```json
 {
 	"token": "",
-    "asset_uuid": ""
+  	"asset_uuid": "",
+	"description": "", // 0 <= len <= 1024
 }
 Success
 {
@@ -261,7 +262,37 @@ Fault
 ```json
 {
 	"token": "",
-    "asset_uuid": ""
+    "asset_uuid": "",
+	"description": "" // 0 <= len <= 1024
+}
+Success
+{
+    "code": 0,
+    "info": message
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+
+- uuid 无效：`code = 10, message = "invalid asset uuid"`
+- 资产不属于自己：`code = 11, message = "asset not belong to you"`
+
+#### /asset/return
+
+员工申请归还资产，创建归还工单
+
+权限：仅限员工归还自己的资产
+
+```json
+{
+	"token": "",
+  	"asset_uuid": "",
+	"description": "", // 0 <= len <= 1024
 }
 Success
 {

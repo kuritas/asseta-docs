@@ -3,7 +3,7 @@
 - token 不存在：`code = 1, message = "invalid token"`
 - token 超时：`code = 2, message = "token expired"`
 
-#### /ticket/create/apply
+#### /ticket/request/create
 
 员工申请资产，创建申请工单
 
@@ -32,7 +32,7 @@ Fault
 - uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 - 资产不可申请：`code = 11, message = "asset cannot apply"`
 
-#### /ticket/create/maintain
+#### /ticket/maintain/create
 
 用户提出请求对资产进行维保，创建维保工单
 
@@ -61,7 +61,7 @@ Fault
 - uuid 无效：`code = 10, message = "invalid asset uuid"`
 - 资产不属于自己：`code = 11, message = "asset not belong to you"`
 
-#### /ticket/create/return
+#### /ticket/return/create
 
 员工申请归还资产，创建归还工单
 

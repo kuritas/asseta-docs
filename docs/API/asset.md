@@ -61,6 +61,8 @@ Fault
 
 只能修改空闲资产，修改会使得所有相关待审批工单失效（副作用！）。
 
+upload_img 为 True 时，会返回 url。
+
 权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
 
 ```json
@@ -72,6 +74,7 @@ Fault
 	"description": "", // 0 <= len <= 1024
 	"category_uuid": "",
 	"parent_uuid": "", // "" to make root, not given to keep the same
+	"upload_img": boolean,
 }
 Success
 {
@@ -81,7 +84,8 @@ Success
 Fault
 {
 	"code": *,
-	"info": message
+	"info": message,
+	"url": "" // exists only when upload_img is True
 }
 
 ```

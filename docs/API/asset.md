@@ -61,7 +61,7 @@ Fault
 
 只能修改空闲资产，修改会使得所有相关待审批工单失效（副作用！）。
 
-upload_img 为 True 时，会返回 url。
+upload_img 为 True 时，会返回 url。这个 url 必须通过 get 访问，10分钟过期。必须要在header里包含 'Content-Type': 'image/jpeg'。
 
 权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
 

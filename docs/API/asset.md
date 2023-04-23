@@ -93,7 +93,7 @@ Fault
 错误类型：
 
 - 权限不足：`code = 3, message = "no access"`
-- asset_uuid 本资产不存在（包括资产不可见）： `code = 12, message = "invalid asset_uuid"`
+- asset_uuid 本资产不存在（包括资产不可见）： `code = 10, message = "invalid asset_uuid"`
 - 类别不存在： `code = 11, message = "invalid category"`
 - parent_uuid 父资产不存在（包括资产不可见）： `code = 12, message = "invalid parent_uuid"`
 - 父资产回环（父资产是自己，或者是孙子）：`code = 30, message = "making loop"`
@@ -237,7 +237,8 @@ Fault
 ```json
 {
 	"token": "",
-    "asset_uuid": ""
+  	"asset_uuid": "",
+	"description": "", // 0 <= len <= 1024
 }
 Success
 {
@@ -265,7 +266,8 @@ Fault
 ```json
 {
 	"token": "",
-    "asset_uuid": ""
+    "asset_uuid": "",
+	"description": "" // 0 <= len <= 1024
 }
 Success
 {
@@ -284,7 +286,36 @@ Fault
 - uuid 无效：`code = 10, message = "invalid asset uuid"`
 - 资产不属于自己：`code = 11, message = "asset not belong to you"`
 
-#### /asset/edit
+#### /asset/return
+
+员工申请归还资产，创建归还工单
+
+权限：仅限员工归还自己的资产
+
+```json
+{
+	"token": "",
+  	"asset_uuid": "",
+	"description": "", // 0 <= len <= 1024
+}
+Success
+{
+    "code": 0,
+    "info": message
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+
+- uuid 无效：`code = 10, message = "invalid asset uuid"`
+- 资产不属于自己：`code = 11, message = "asset not belong to you"`
+
+#### /asset/setstatus
 
 资产管理员修改资产的状态
 
@@ -296,13 +327,7 @@ Fault
 {
 	"token": "",
     "asset_uuid": "",
-    "name": "", // 0 < len <= 32, optional
-    "description": "", // optional, 0 <= len <= 1024
-    "category_uuid": "", // optional
     "status": "", // ["IDLE", "IN_USE", "IN_MAINTAIN", "RETIRED", "DELETED"] IDLE means set user=null  ontional
-    "is_distinct": boolean, // optional
-    "count": number // non-negative integer, optional, default is 1, 
-    // must not exceed 1 when is_distinct is True
 }
 Success
 {

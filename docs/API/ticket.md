@@ -30,7 +30,7 @@ Fault
 错误类型：
 
 - uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
-- 资产当前处于不可申请状态：`code = 11, message = "asset cannot apply"`
+- 资产不可申请：`code = 11, message = "asset cannot apply"`
 
 #### /ticket/create/maintain
 

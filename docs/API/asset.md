@@ -154,14 +154,15 @@ Fault
 
 #### /asset/info
 
-查询资产详细信息
+查询资产详细信息。当 include_img 为 True 时，返回的 url 可以访问文件，10分钟过期。如果图片不存在，本函数不会报错，但是返回的 url 会给 404 not found。
 
 权限：仅限本业务实体
 
 ```json
 {
     "token": "",
-    "asset_uuid": ""
+    "asset_uuid": "",
+	"include_img": boolean // optional, default is False
 }
 Success
 {
@@ -185,7 +186,8 @@ Success
                 "uuid": "",
                 "name": "",
             }
-        ]
+        ],
+		"img_url": "", // exists only when include_img is True
     }
 }
 Fault

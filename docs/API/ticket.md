@@ -83,6 +83,8 @@ Fault
 
 create, approve
 
+INVALID 仅仅发生在，被申请的资产被修改了。【记得改asset相关操作的副作用！】
+
 #### /ticket/request/create
 
 - IDLE -> IDLE
@@ -136,6 +138,7 @@ Success
 {
     "code": 0,
     "info": "Succeed",
+    "ticket_uuid": "",
 }
 Fault
 {
@@ -149,7 +152,15 @@ Fault
 - 工单不是open：`code = 31, message = "ticket not open"`
 - 自己通过自己的工单：`code = 32, message = "cannot accept your own ticket"`
 
+### /ticket/maintain
+
+create, approve, return
+
+return 事实上不操作工单，只是把资产状态改为 IN_USE。
+
 #### /ticket/maintain/create
+
+- IN_USE -> TO_MAINTAIN
 
 用户提出请求对资产进行维保，创建维保工单。维保时，挂账人为自己。
 
@@ -176,8 +187,71 @@ Fault
 
 错误类型：
 
-- uuid 无效：`code = 10, message = "invalid asset uuid"`
-- 资产不属于自己：`code = 11, message = "asset not belong to you"`
+- 资产不存在，包括不属于自己：`code = 11, message = "asset does not exist"`
+- 资产不是IN_USE：`code = 12, message = "asset not in use"`
+
+#### /ticket/maintain/approve
+
+- accept=true: TO_MAINTAIN -> IN_MAINTAIN
+- accept=false: TO_MAINTAIN -> IN_USE
+
+资产管理员审批维保工单，同意或拒绝；自己拒绝自己的申请
+
+权限：资产管理员为子树；用户为自己，且只能拒绝
+
+```json
+{
+    "token": "",
+    "ticket_uuid": "",
+    "accept": true, // true for accept, false for reject
+    "message": "" // 0 <= len <= 1024
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "ticket_uuid": "",
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+- uuid 无效，包括自己不可见、不是维保工单：`code = 30, message = "invalid ticket uuid"`
+- 工单不是open：`code = 31, message = "ticket not open"`
+- 自己通过自己的工单：`code = 32, message = "cannot accept your own ticket"`
+
+#### /ticket/maintain/return
+
+- IN_MAINTAIN -> IN_USE
+
+资产管理员归还维保资产，把资产状态改为 IN_USE。不涉及工单。
+
+权限：资产管理员为子树
+
+```json
+{
+    "token": "",
+    "asset_uuid": "",
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+- 资产 uuid 无效，包括资产挂账部门不是子树：`code = 10, message = "asset does not exist"`
+- 资产不是 IN_MAINTAIN：`code = 11, message = "asset not in maintain"`
 
 #### /ticket/return/create
 

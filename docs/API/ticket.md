@@ -85,7 +85,9 @@ create, approve
 
 #### /ticket/request/create
 
-员工申请资产，创建申请工单
+- IDLE -> IDLE
+
+员工申请资产，创建申请工单。会把平行的其他申请工单都拒绝掉。
 
 权限：仅限员工申请当前业务实体的根资产
 
@@ -116,6 +118,9 @@ Fault
 
 #### /ticket/request/approve
 
+- accept=true: IDLE -> IN_USE
+- accept=false: IDLE -> IDLE
+
 资产管理员审批申请工单，同意或拒绝；自己拒绝自己的申请
 
 权限：资产管理员为子树；用户为自己，且只能拒绝
@@ -124,7 +129,7 @@ Fault
 {
     "token": "",
     "ticket_uuid": "",
-    "approve": true, // true for approve, false for reject
+    "accept": true, // true for accept, false for reject
     "message": "" // 0 <= len <= 1024
 }
 Success
@@ -142,11 +147,11 @@ Fault
 错误类型：
 - uuid 无效，包括自己不可见、不是申请工单：`code = 30, message = "invalid ticket uuid"`
 - 工单不是open：`code = 31, message = "ticket not open"`
-- 自己通过自己的工单：`code = 32, message = "cannot approve your own ticket"`
+- 自己通过自己的工单：`code = 32, message = "cannot accept your own ticket"`
 
 #### /ticket/maintain/create
 
-用户提出请求对资产进行维保，创建维保工单
+用户提出请求对资产进行维保，创建维保工单。维保时，挂账人为自己。
 
 权限：仅限用户提出自己的资产
 

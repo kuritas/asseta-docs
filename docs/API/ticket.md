@@ -79,11 +79,15 @@ Fault
 
 不会出错，错了就是空列表。
 
+### /ticket/request
+
+create, approve
+
 #### /ticket/request/create
 
 员工申请资产，创建申请工单
 
-权限：仅限员工申请当前业务实体的资产
+权限：仅限员工申请当前业务实体的根资产
 
 ```json
 {
@@ -94,7 +98,8 @@ Fault
 Success
 {
     "code": 0,
-    "info": message
+    "info": "Succeed",
+    "ticket_uuid": ""
 }
 Fault
 {
@@ -106,7 +111,38 @@ Fault
 错误类型：
 
 - uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
-- 资产不可申请：`code = 11, message = "asset cannot apply"`
+- 资产不是根：`code = 11, message = "asset not root"`
+- 资产不是idle：`code = 12, message = "asset not idle"`
+
+#### /ticket/request/approve
+
+资产管理员审批申请工单，同意或拒绝；自己拒绝自己的申请
+
+权限：资产管理员为子树；用户为自己，且只能拒绝
+
+```json
+{
+    "token": "",
+    "ticket_uuid": "",
+    "approve": true, // true for approve, false for reject
+    "message": "" // 0 <= len <= 1024
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+- uuid 无效，包括自己不可见、不是申请工单：`code = 30, message = "invalid ticket uuid"`
+- 工单不是open：`code = 31, message = "ticket not open"`
+- 自己通过自己的工单：`code = 32, message = "cannot approve your own ticket"`
 
 #### /ticket/maintain/create
 
@@ -118,12 +154,13 @@ Fault
 {
 	"token": "",
     "asset_uuid": "",
-	"description": "" // 0 <= len <= 1024
+	"message": "" // 0 <= len <= 1024
 }
 Success
 {
     "code": 0,
-    "info": message
+    "info": "Succeed",
+    "ticket_uuid": ""
 }
 Fault
 {
@@ -152,7 +189,7 @@ Fault
 Success
 {
     "code": 0,
-    "info": message
+    "info": "Succeed",
 }
 Fault
 {

@@ -1,7 +1,3 @@
-# API_assetss
-
-- token 不存在：`code = 1, message = "invalid token"`
-- token 超时：`code = 2, message = "token expired"`
 
 #### /ticket/request/create
 

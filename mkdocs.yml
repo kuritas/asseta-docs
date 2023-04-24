@@ -55,6 +55,7 @@ nav:
         - Department: API/department.md
         - Asset: API/asset.md
         - Category: API/category.md
+        - Ticket: API/ticket.md
     - git规范:
         - git/index.md
     - 后端:

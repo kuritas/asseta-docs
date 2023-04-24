@@ -25,6 +25,47 @@ IDLE, IN_USE, IN_MAINTAIN, RETIRED, DELETED
 新增： TO_MAINTAIN, TO_RETURN
 ```
 
+#### /ticket/info
+
+获取工单信息。
+
+权限：仅限本业务实体
+
+```json
+{
+    "token": "",
+    "ticket_uuid": ""
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "data": {
+        "type": "",
+        "asset_uuid": "",
+        "asset_name": "",
+        "requester_username": "",
+        "request_time": "",
+        "approver_username": "",
+        "approve_time": "",
+        "status": "",
+        "department_uuid": "",
+        "department_name": "",
+        // 相比于search，多了以下字段
+        "request_msg": "",
+        "approve_msg": "",
+    }
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+- uuid 无效，包括自己不可见：`code = 10, message = "invalid ticket uuid"`
+
 #### /ticket/search
 
 搜索工单。仅限自己可见的那些。可见包括：
@@ -81,7 +122,7 @@ Fault
 
 ### /ticket/request
 
-create, approve
+info, create, approve
 
 INVALID 仅仅发生在，被申请的资产被修改了。【记得改asset相关操作的副作用！】
 
@@ -252,6 +293,10 @@ Fault
 错误类型：
 - 资产 uuid 无效，包括资产挂账部门不是子树：`code = 10, message = "asset does not exist"`
 - 资产不是 IN_MAINTAIN：`code = 11, message = "asset not in maintain"`
+
+### /ticket/return
+
+create, approve
 
 #### /ticket/return/create
 

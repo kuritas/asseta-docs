@@ -14,6 +14,7 @@ approve_time = models.DateTimeField(null=True, default=None)
 approve_msg = models.TextField(null=True, max_length=MAX_TICKETMSG_LEN, default=None)
 uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
 asset = models.ForeignKey(Asset, on_delete=models.SET_NULL, null=True)
+number = IntegerField(default=0)
 department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
 status = OPEN = "OPEN", ACCEPTED = "ACCEPTED", REJECTED = "REJECTED", INVALID = "INVALID"
 ```
@@ -44,6 +45,7 @@ Success
         "type": "",
         "asset_uuid": "",
         "asset_name": "",
+        "asset_number": 233,
         "requester_username": "",
         "request_time": "",
         "approver_username": "",
@@ -100,6 +102,7 @@ Success
             "type": "",
             "asset_uuid": "",
             "asset_name": "",
+            "asset_number": 233,
             "requester_username": "",
             "request_time": "",
             "approver_username": "",
@@ -138,7 +141,8 @@ INVALID 仅仅发生在，被申请的资产被修改了。【记得改asset相�
 {
 	"token": "",
   	"asset_uuid": "",
-	"description": "", // 0 <= len <= 1024
+	"message": "", // 0 <= len <= 1024
+    "number": 233, // not optional, use 1 for most cases
 }
 Success
 {
@@ -158,6 +162,7 @@ Fault
 - uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 - 资产不是根：`code = 11, message = "asset not root"`
 - 资产不是idle：`code = 12, message = "asset not idle"`
+- 资产数量不足：`code = 13, message = "asset number not enough"`
 
 #### /ticket/request/approve
 
@@ -300,6 +305,8 @@ create, approve
 
 #### /ticket/return/create
 
+- IN_USE -> TO_RETURN
+
 员工申请归还资产，创建归还工单
 
 权限：仅限员工归还自己的资产
@@ -308,12 +315,13 @@ create, approve
 {
 	"token": "",
   	"asset_uuid": "",
-	"description": "", // 0 <= len <= 1024
+	"message": "", // 0 <= len <= 1024
 }
 Success
 {
     "code": 0,
     "info": "Succeed",
+    "ticket_uuid": ""
 }
 Fault
 {
@@ -324,5 +332,38 @@ Fault
 
 错误类型：
 
-- uuid 无效：`code = 10, message = "invalid asset uuid"`
 - 资产不属于自己：`code = 11, message = "asset not belong to you"`
+- 资产不是 IN_USE：`code = 12, message = "asset not in use"`
+
+#### /ticket/return/approve
+
+- TO_RETURN -> IDLE
+
+管理员审批归还工单，同意或拒绝；自己拒绝自己的申请
+
+权限：管理员为子树；用户为自己，且只能拒绝
+
+```json
+{
+	"token": "",
+  	"ticket_uuid": "",
+    "accept": true, // true for accept, false for reject
+	"message": "", // 0 <= len <= 1024
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "ticket_uuid": ""
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+- uuid 无效，包括自己不可见、不是申请工单：`code = 30, message = "invalid ticket uuid"`
+- 工单不是open：`code = 31, message = "ticket not open"`
+- 自己通过自己的工单：`code = 32, message = "cannot accept your own ticket"`

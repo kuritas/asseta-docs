@@ -261,8 +261,9 @@ Fault
 
 错误类型：
 
-- 资产不存在，包括不属于自己：`code = 11, message = "asset does not exist"`
-- 资产不是IN_USE：`code = 12, message = "asset not in use"`
+- uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
+- 资产不属于自己（包括不是 IN_USE）：`code = 11, message = "asset not belong to you"`
+
 
 #### /ticket/maintain/approve
 
@@ -388,8 +389,8 @@ Fault
 
 错误类型：
 
-- 资产不属于自己：`code = 11, message = "asset not belong to you"`
-- 资产不是 IN_USE：`code = 12, message = "asset not in use"`
+- uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
+- 资产不属于自己（包括不是 IN_USE）：`code = 11, message = "asset not belong to you"`
 
 #### /ticket/return/approve
 

@@ -2,7 +2,7 @@
 
 - token 不存在：`code = 1, message = "invalid token"`
 - token 超时：`code = 2, message = "token expired"`
-- 不存在的<type>：`code = 40, message = invalid ticket type"`
+- 不存在的type：`code = 40, message = invalid ticket type"`
 
 ## 抽象工单
 

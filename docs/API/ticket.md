@@ -163,7 +163,7 @@ Fault
 - uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
 - 资产不是根：`code = 11, message = "asset not root"`
 - 资产不是idle：`code = 12, message = "asset not idle"`
-- 资产数量不足：`code = 13, message = "asset number not enough"`
+- 资产数量不足，或对条目型资产指定非1的数量：`code = 13, message = "asset number error"`
 
 #### /ticket/request/approve
 
@@ -262,7 +262,8 @@ Fault
 错误类型：
 
 - uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
-- 资产不属于自己（包括不是 IN_USE）：`code = 11, message = "asset not belong to you"`
+- 资产不是根：`code = 11, message = "asset not root"`
+- 资产不属于自己（包括不是 IN_USE）：`code = 12, message = "asset not belong to you"`
 
 
 #### /ticket/maintain/approve
@@ -297,7 +298,6 @@ Fault
 错误类型：
 - uuid 无效，包括自己不可见、不是维保工单：`code = 30, message = "invalid ticket uuid"`
 - 工单不是open：`code = 31, message = "ticket not open"`
-- 自己通过自己的工单：`code = 32, message = "cannot accept your own ticket"`
 
 #### /ticket/maintain/return
 
@@ -326,6 +326,7 @@ Fault
 
 错误类型：
 - 资产 uuid 无效，包括资产挂账部门不是子树：`code = 10, message = "asset does not exist"`
+- 资产不是根：`code = 11, message = "asset not root"`
 - 资产不是 IN_MAINTAIN：`code = 11, message = "asset not in maintain"`
 
 #### /ticket/maintain/cancel
@@ -390,7 +391,8 @@ Fault
 错误类型：
 
 - uuid 无效，包括申请到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
-- 资产不属于自己（包括不是 IN_USE）：`code = 11, message = "asset not belong to you"`
+- 资产不是根：`code = 11, message = "asset not root"`
+- 资产不属于自己（包括不是 IN_USE）：`code = 12, message = "asset not belong to you"`
 
 #### /ticket/return/approve
 

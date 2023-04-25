@@ -2,6 +2,7 @@
 
 - token 不存在：`code = 1, message = "invalid token"`
 - token 超时：`code = 2, message = "token expired"`
+- 不存在的<type>：`code = 40, message = invalid ticket type"`
 
 ## 抽象工单
 
@@ -169,9 +170,9 @@ Fault
 - accept=true: IDLE -> IN_USE
 - accept=false: IDLE -> IDLE
 
-资产管理员审批申请工单，同意或拒绝；自己拒绝自己的申请
+资产管理员审批申请工单，同意或拒绝
 
-权限：资产管理员为子树；用户为自己，且只能拒绝
+权限：资产管理员为子树
 
 ```json
 {
@@ -196,7 +197,34 @@ Fault
 错误类型：
 - uuid 无效，包括自己不可见、不是申请工单：`code = 30, message = "invalid ticket uuid"`
 - 工单不是open：`code = 31, message = "ticket not open"`
-- 自己通过自己的工单：`code = 32, message = "cannot accept your own ticket"`
+
+#### /ticket/request/cancel
+
+- IDLE -> IDLE
+
+权限：用户为自己
+
+```json
+{
+    "token": "",
+    "ticket_uuid": "",
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "ticket_uuid": "",
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+- uuid 无效，包括自己不可见、不是申请工单：`code = 30, message = "invalid ticket uuid"`
+- 工单不是open：`code = 31, message = "ticket not open"`
 
 ### /ticket/maintain
 
@@ -241,9 +269,9 @@ Fault
 - accept=true: TO_MAINTAIN -> IN_MAINTAIN
 - accept=false: TO_MAINTAIN -> IN_USE
 
-资产管理员审批维保工单，同意或拒绝；自己拒绝自己的申请
+资产管理员审批维保工单，同意或拒绝
 
-权限：资产管理员为子树；用户为自己，且只能拒绝
+权限：资产管理员为子树
 
 ```json
 {
@@ -299,6 +327,34 @@ Fault
 - 资产 uuid 无效，包括资产挂账部门不是子树：`code = 10, message = "asset does not exist"`
 - 资产不是 IN_MAINTAIN：`code = 11, message = "asset not in maintain"`
 
+#### /ticket/maintain/cancel
+
+- TO_MAINTAIN -> IN_USE
+
+权限：用户为自己
+
+```json
+{
+    "token": "",
+    "ticket_uuid": "",
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "ticket_uuid": "",
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+- uuid 无效，包括自己不可见、不是申请工单：`code = 30, message = "invalid ticket uuid"`
+- 工单不是open：`code = 31, message = "ticket not open"`
+
 ### /ticket/return
 
 create, approve
@@ -339,9 +395,9 @@ Fault
 
 - TO_RETURN -> IDLE
 
-管理员审批归还工单，同意或拒绝；自己拒绝自己的申请
+管理员审批归还工单，同意或拒绝
 
-权限：管理员为子树；用户为自己，且只能拒绝
+权限：资产管理员为子树
 
 ```json
 {
@@ -366,4 +422,31 @@ Fault
 错误类型：
 - uuid 无效，包括自己不可见、不是申请工单：`code = 30, message = "invalid ticket uuid"`
 - 工单不是open：`code = 31, message = "ticket not open"`
-- 自己通过自己的工单：`code = 32, message = "cannot accept your own ticket"`
+
+#### /ticket/return/cancel
+
+- TO_MAINTAIN -> IN_USE
+
+权限：用户为自己
+
+```json
+{
+    "token": "",
+    "ticket_uuid": "",
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "ticket_uuid": "",
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
+错误类型：
+- uuid 无效，包括自己不可见、不是申请工单：`code = 30, message = "invalid ticket uuid"`
+- 工单不是open：`code = 31, message = "ticket not open"`

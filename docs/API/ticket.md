@@ -41,21 +41,25 @@ Success
 {
     "code": 0,
     "info": "Succeed",
-    "data": {
-        "type": "",
-        "asset_uuid": "",
-        "asset_name": "",
-        "asset_number": 233,
-        "requester_username": "",
-        "request_time": "",
-        "approver_username": "",
-        "approve_time": "",
-        "status": "",
-        "department_uuid": "",
-        "department_name": "",
-        // 相比于search，多了以下字段
-        "request_msg": "",
-        "approve_msg": "",
+    "data": {    
+        "uuid": self.uuid.hex,
+        "type": self.ticket_type,
+        "status": self.status,
+        
+        "asset_uuid": self.asset.uuid.hex if self.asset else "",
+        "asset_name": self.asset.name if self.asset else "",
+        "asset_number": self.number if self.asset else "",
+
+        "requester": self.requester.username if self.requester else "",
+        "request_time": self.request_time,
+        "approver": self.approver.username if self.approver else "",
+        "approve_time": self.approve_time,
+
+        "department_uuid": self.department.uuid.hex if self.department else "",
+        "department_name": self.department.name if self.department else "",
+
+        "request_msg": self.request_msg,
+        "approve_msg": self.approve_msg,
     }
 }
 Fault
@@ -99,17 +103,21 @@ Success
 	"num_items": number,
 	"data": [
 		{
-            "type": "",
-            "asset_uuid": "",
-            "asset_name": "",
-            "asset_number": 233,
-            "requester_username": "",
-            "request_time": "",
-            "approver_username": "",
-            "approve_time": "",
-            "status": "",
-            "department_uuid": "",
-            "department_name": "",
+            "uuid": self.uuid.hex,
+            "type": self.ticket_type,
+            "status": self.status,
+            
+            "asset_uuid": self.asset.uuid.hex if self.asset else "",
+            "asset_name": self.asset.name if self.asset else "",
+            "asset_number": self.number if self.asset else "",
+
+            "requester": self.requester.username if self.requester else "",
+            "request_time": self.request_time,
+            "approver": self.approver.username if self.approver else "",
+            "approve_time": self.approve_time,
+
+            "department_uuid": self.department.uuid.hex if self.department else "",
+            "department_name": self.department.name if self.department else "",
 		}
 	]
 }

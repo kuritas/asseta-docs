@@ -335,7 +335,7 @@ Fault
 错误类型：
 - 资产 uuid 无效，包括资产挂账部门不是子树：`code = 10, message = "asset does not exist"`
 - 资产不是根：`code = 11, message = "asset not root"`
-- 资产不是 IN_MAINTAIN：`code = 11, message = "asset not in maintain"`
+- 资产不是 IN_MAINTAIN：`code = 12, message = "asset not in maintain"`
 
 #### /ticket/maintain/cancel
 

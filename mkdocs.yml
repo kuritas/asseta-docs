@@ -63,3 +63,4 @@ nav:
     - 需求:
         - 需求列表: requirement/requirement.md
         - 工单列表: requirement/ticket.md
+        - 操作记录: requirement/record.md

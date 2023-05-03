@@ -52,7 +52,7 @@ Fault
 
 #### exlink/list
 
-权限：useradmin
+权限：不是superadmin
 
 ```json
 POST

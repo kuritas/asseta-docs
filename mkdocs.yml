@@ -57,6 +57,7 @@ nav:
         - Category: API/category.md
         - Ticket: API/ticket.md
         - Record: API/record.md
+        - Exlink: API/exlink.md
     - git规范:
         - git/index.md
     - 后端:

@@ -69,4 +69,11 @@ custom_attributes: JSONfield
 
 ```
 
+#### Exlink
 
+```python
+    uuid    = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
+    title   = models.CharField(max_length=MAX_EXLINK_NAME_LEN, blank=False)
+    url     = models.TextField(blank=True)
+    company = models.ForeignKey(to=Department, on_delete=models.CASCADE)
+```

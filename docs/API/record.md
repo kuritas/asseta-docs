@@ -65,6 +65,10 @@ Fault
         // both supports comma separated list; space shall be filtered
         // "xxx_contains": "a,,,b   ,cd e" filters record
         // that contains 'a' AND 'b' AND 'cd e'
+        // Note this is substring search for json like "{'caller': 'user1', 'user': 'alex'}"
+        // So contains = "alle" MATCHES the string;
+        // This allows advanced usages like contains = "'role1': 'user1', 'role2': 'user2'"
+        // in this case comma is seperated, but the 'role': 'content' structure is preserved
 	},
 	"numberperpage": number, // optional, None for 50, Max = 50
 	"pagenumber": number // optional, None for 1

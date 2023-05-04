@@ -12,6 +12,7 @@ record 包含几个 field：
 uuid
 time
 caller
+company
 event = "success: /user/login"
 brief_template: "{user} at {ip} successfully loginin at {time}"
 brief_json = '{"user": "admin", "ip": "1.2.3.4", time: "2023-01-02T14:13:11.302226"}'

@@ -5,7 +5,7 @@
 
 #### /asset/create
 
-导入资产
+导入资产。通过包含 "upload_img": True 来获取传图链接。这个 url 必须通过 put 访问，10分钟过期。必须要在header里包含 'Content-Type': 'image/jpeg'。
 
 权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
 
@@ -30,15 +30,20 @@
 				}
 			],
 			"is_distinct": boolean,
-			"count": number // non-negative integer, optional, default is 1, 
-					            // must not exceed 1 when is_distinct is True
+			"count": number, // non-negative integer, optional, default is 1, 
+					             // must not exceed 1 when is_distinct is True
+			"upload_img": boolean, // optional; if True, return contains upload url
 		}
 	]
 }
 Success
 {
 	"code": 0,
-	"info": "Succeed"
+	"info": "Succeed",
+	"assets": [{ // list of successfully created assets
+		"uuid": "",
+		"url": "" // upload url, is nonempty only when corresponding upload_img is True
+	}]
 }
 Fault
 {
@@ -61,7 +66,7 @@ Fault
 
 只能修改空闲资产，修改会使得所有相关待审批工单失效（副作用！）。
 
-upload_img 为 True 时，会返回 url。这个 url 必须通过 get 访问，10分钟过期。必须要在header里包含 'Content-Type': 'image/jpeg'。
+upload_img 为 True 时，会返回 url。这个 url 必须通过 put 访问，10分钟过期。必须要在header里包含 'Content-Type': 'image/jpeg'。
 
 权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
 

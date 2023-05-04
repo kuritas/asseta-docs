@@ -62,6 +62,9 @@ Fault
 	"filter": {
         "event_contains": "",
         "brief_json_contains": "",
+        // both supports comma or space separated
+        // "xxx_contains": "a,,,b   ,cd   e" filters record
+        // that contains a AND b AND cd AND e
 	},
 	"numberperpage": number, // optional, None for 50, Max = 50
 	"pagenumber": number // optional, None for 1

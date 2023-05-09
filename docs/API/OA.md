@@ -61,6 +61,7 @@ Fault
 - token 相关错误
 
 - code = 10, message = "user has banded"
+- code = 11, message = "OA account has banded"
 
 - code 错误：将飞书的错误信息返回即可。
 

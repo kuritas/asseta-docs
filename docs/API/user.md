@@ -113,7 +113,9 @@ Success
 		# 对于超管，list为空，两个uuid为空串
 		"is_superadmin": bool,
 		"is_useradmin": bool,
-		"is_assetadmin": bool
+		"is_assetadmin": bool,
+		"is_OA_banded": bool,
+		"OA_username": "", // "" if not band
 	}
 }
 Fault

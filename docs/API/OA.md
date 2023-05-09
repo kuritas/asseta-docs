@@ -58,9 +58,11 @@ Fault
 
 错误信息：
 
-token 相关错误
+- token 相关错误
 
-code 错误：将飞书的错误信息返回即可。
+- code = 10, message = "user has banded"
+
+- code 错误：将飞书的错误信息返回即可。
 
 #### /OA/unbinding
 

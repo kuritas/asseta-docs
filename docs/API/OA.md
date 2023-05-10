@@ -52,6 +52,8 @@ Fault
 ```
 错误信息：将飞书的错误信息返回即可。
 
+- code = 10, message = "openid is not bound to any user"
+
 #### /oa/binding
 
 用户绑定飞书账号
@@ -78,8 +80,8 @@ Fault
 
 - token 相关错误
 
-- code = 10, message = "user has banded"
-- code = 11, message = "OA account has banded"
+- code = 10, message = "user is bound to feishu account"
+- code = 11, message = "feishu account is bound to another user"
 
 - code 错误：将飞书的错误信息返回即可。
 

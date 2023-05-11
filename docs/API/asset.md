@@ -7,6 +7,8 @@
 
 导入资产。通过包含 "upload_img": True 来获取传图链接。这个 url 必须通过 put 访问，10分钟过期。必须要在header里包含 'Content-Type': 'image/jpeg'。
 
+保质期单位为「天」。
+
 权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
 
 ```json
@@ -26,12 +28,16 @@
 					"category_uuid": "",
 					"children": [], // empty
 					"is_distinct": boolean,
-					"count": number
+					"count": number,
+					"value": number, // positive, <= 2147483647
+					"lifespan": number, // positive, <= 2147483647
 				}
 			],
 			"is_distinct": boolean,
 			"count": number, // non-negative integer, optional, default is 1, 
 					             // must not exceed 1 when is_distinct is True
+			"value": number, // positive, <= 2147483647
+			"lifespan": number, // positive, <= 2147483647
 			"upload_img": boolean, // optional; if True, return contains upload url
 		}
 	]
@@ -139,6 +145,9 @@ Success
 			"department_uuid": "",
 			"category_name": "",
 			"category_uuid": "",
+			"totle_value": number, 
+			"current_value": number,
+			"lifespan": number, 
 			"is_distinct": bool,
 			"count": number
 		}
@@ -182,6 +191,9 @@ Success
         "department_names": [""],   // from company
 		"category_uuids": [""],     // from dummy
         "category_names": [""],     // from dummy
+		"totle_value": number, 
+		"current_value": number,
+		"lifespan": number, 
         "is_distinct": boolean,
         "count": number,
         "father_uuid": "", // return "" if no father
@@ -202,17 +214,57 @@ Fault
 }
 ```
 
+#### asset/statistic
+
+权限：资产管理员，且指定的部门需要在其子树中
+
+```json
+{
+    "token": "",
+    "department_uuid": "",
+	"status": "" //only account for assets with the specified status. "" or None for all assets expect those retired or deleted
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "data": {
+     	"total_num": number, //资产总数
+    	"total_value": number, //资产总价值
+		"subdepartment_info":[
+			{
+				"department_uuid": uuid, 
+				"total_num": number,
+				"total_value": number,
+			}
+		],
+		"history":[
+			{
+				"date": date,
+				"total_value": number
+			}
+		]
+    }
+}
+Fault
+{
+    "code": *,
+    "info": message
+}
+```
+
 错误类型：
 
-- uuid 无效，包括查询到非本业务实体资产：`code = 10, message = "invalid asset uuid"`
+- 不存在或没有权限的部门：`code = 10, message = "invalid department uuid"`
+- 不存在的状态：`code = 11, message = "invalid status"`
 
-#### /asset/transfer
+~~#### /asset/transfer~~
 
 子级资产更换父亲（只能从一个资产的附属资产变为另一个资产的附属资产）。
 
 权限：仅限本业务实体。
 
-```json
+```jsonx
 {
     "token": "",
     "source_uuid": "", // 待转移资产 uuid
@@ -236,7 +288,7 @@ Fault
 - 待转移资产不是子级资产，或目标资产不是父级资产：`code = 11, message = "invalid source or target asset"`
 
 
-#### /asset/setstatus
+~~#### /asset/setstatus~~
 
 资产管理员修改资产的状态
 
@@ -266,4 +318,3 @@ Fault
 
 - 权限不足，自己非资产管理员或者资产不属于当前部门： `code = 3, message = "no access"`
 - uuid 无效：`code = 10, message = "invalid asset uuid"`
-

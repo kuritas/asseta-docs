@@ -7,7 +7,7 @@
 
 导入资产。通过包含 "upload_img": True 来获取传图链接。这个 url 必须通过 put 访问，10分钟过期。必须要在header里包含 'Content-Type': 'image/jpeg'。
 
-保质期单位为「天」。
+保质期单位为「天」。**所有价格全部精确到整数，前端可以考虑精确到 0.1 分（也就是把用户输入数字乘 1000）** 。
 
 权限：assetadmin 权限范围为子树，superadmin/useradmin 没有权限
 
@@ -148,6 +148,7 @@ Success
 			"totle_value": number, 
 			"current_value": number,
 			"lifespan": number, 
+			"rest_life": number,
 			"is_distinct": bool,
 			"count": number
 		}

@@ -214,7 +214,7 @@ Fault
 }
 ```
 
-#### asset/statistic
+#### /asset/statistic
 
 权限：资产管理员，且指定的部门需要在其子树中
 

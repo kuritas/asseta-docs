@@ -222,7 +222,6 @@ Fault
 {
     "token": "",
     "department_uuid": "",
-	"status": "" //only account for assets with the specified status. "" or None for all assets expect those retired or deleted
 }
 Success
 {
@@ -231,9 +230,17 @@ Success
     "data": {
      	"total_num": number, //资产总数
     	"total_value": number, //资产总价值
+        "status_info": [
+            {
+                "status": ["IDLE", "IN_USE", "IN_MAINTAIN"],
+                "total_num": number,
+                "total_value": number,
+            }
+        ], // 共有 3 项，分别是 IDLE IN_USE IN_MAINTAIN 的资产信息
 		"subdepartment_info":[
 			{
 				"department_uuid": uuid, 
+                "department_name": "",
 				"total_num": number,
 				"total_value": number,
 			}

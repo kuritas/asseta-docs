@@ -36,8 +36,8 @@
 			"is_distinct": boolean,
 			"count": number, // non-negative integer, optional, default is 1, 
 					             // must not exceed 1 when is_distinct is True
-			"value": number, // positive, <= 2147483647
-			"lifespan": number, // positive, <= 2147483647
+			"value": number, // positive, <= 2147483647 采取 value * 1000 的存储
+			"lifespan": number, // positive, <= 2147483647 单位：天
 			"upload_img": boolean, // optional; if True, return contains upload url
 		}
 	]
@@ -192,9 +192,9 @@ Success
         "department_names": [""],   // from company
 		"category_uuids": [""],     // from dummy
         "category_names": [""],     // from dummy
-		"totle_value": number, 
-		"current_value": number,
-		"lifespan": number, 
+		"totle_value": number,      // 资产原价值
+		"current_value": number,    // 现价值
+		"lifespan": number,         // 剩余期限
         "is_distinct": boolean,
         "count": number,
         "father_uuid": "", // return "" if no father
@@ -214,6 +214,44 @@ Fault
     "info": message
 }
 ```
+
+
+#### /asset/retire
+
+资产清退
+
+资产状态变为 RETIRED
+
+权限：资产管理员，且清退的资产不能处于 RETIRED / DELETED 状态，并且资产管理员可以管理资产。
+
+
+```json
+{
+    "token": "",
+    "asset_uuid_list": [
+        "",
+    ],
+}
+Success
+{
+    "code": 0,
+    "info": "Succeed",
+    "success_list": [
+        "",
+    ],
+    "fault_list": [
+        "",
+        // 失败原因：权限不足 或者 状态错误
+    ],
+}
+Fault
+{
+    "code": *,
+    "info": message,
+}
+```
+
+错误类型：所有 token 相关的错误。
 
 #### /asset/statistic
 

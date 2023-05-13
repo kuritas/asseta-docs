@@ -45,6 +45,8 @@ Fault
 
 - 部门不存在或无权限： `code = 10, message = "invalid department uuid"`
 - 类别不存在： `code = 11, message = "invalid category"`
+- 非法类别：`code = 12, message = "invalid alert type"`
+- 非法数值：`code = 13, message = "value must be non-negative"`
 
 #### /alert/config/delete
 

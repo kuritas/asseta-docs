@@ -240,9 +240,8 @@ Success
     "success_list": [
         "",
     ],
-    "fault_list": [
+    "fail_list": [
         "",
-        // 失败原因：权限不足 或者 状态错误
     ],
 }
 Fault
@@ -252,7 +251,7 @@ Fault
 }
 ```
 
-错误类型：所有 token 相关的错误。
+错误类型：如果用户是资产管理员，那么不会有错误。未成功的uuid将被放入fail_list
 
 #### /asset/statistic
 

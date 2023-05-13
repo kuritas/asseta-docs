@@ -195,6 +195,7 @@ Success
 		"totle_value": number, 
 		"current_value": number,
 		"lifespan": number, 
+		"rest_life": number,
         "is_distinct": boolean,
         "count": number,
         "father_uuid": "", // return "" if no father

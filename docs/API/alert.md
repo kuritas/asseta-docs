@@ -92,6 +92,7 @@ Success
     "data": {[
         "config_uuid": uuid,
         "category_uuid": uuid,
+		"department_uuid": uuid,
         "type": "", //"VALUE", "NUM", "TO_RETIRE"
         "value": number // >= 0
     ]}

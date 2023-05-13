@@ -145,7 +145,7 @@ Success
 			"department_uuid": "",
 			"category_name": "",
 			"category_uuid": "",
-			"totle_value": number, 
+			"total_value": number, 
 			"current_value": number,
 			"lifespan": number, 
 			"rest_life": number,
@@ -192,7 +192,7 @@ Success
         "department_names": [""],   // from company
 		"category_uuids": [""],     // from dummy
         "category_names": [""],     // from dummy
-		"totle_value": number, 
+		"total_value": number, 
 		"current_value": number,
 		"lifespan": number, 
 		"rest_life": number,

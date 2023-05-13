@@ -29,14 +29,14 @@
 					"children": [], // empty
 					"is_distinct": boolean,
 					"count": number,
-					"value": number, // positive, <= 2147483647
-					"lifespan": number, // positive, <= 2147483647
+					"value": number, // positive, <= 2147483647, optional, default is 0
+					"lifespan": number, // positive, <= 2147483647, optional, default is inherit
 				}
 			],
 			"is_distinct": boolean,
 			"count": number, // non-negative integer, optional, default is 1, 
 					             // must not exceed 1 when is_distinct is True
-			"value": number, // positive, <= 2147483647
+			"value": number, // positive, <= 2147483647, optional, default is 0
 			"lifespan": number, // positive, <= 2147483647
 			"upload_img": boolean, // optional; if True, return contains upload url
 		}
@@ -195,6 +195,7 @@ Success
 		"totle_value": number, 
 		"current_value": number,
 		"lifespan": number, 
+		"rest_life": number,
         "is_distinct": boolean,
         "count": number,
         "father_uuid": "", // return "" if no father

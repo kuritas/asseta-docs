@@ -59,6 +59,7 @@ nav:
         - Record: API/record.md
         - Exlink: API/exlink.md
         - OA: API/OA.md
+        - Alert: API/alert.md
     - git规范:
         - git/index.md
     - 后端:

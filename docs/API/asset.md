@@ -109,6 +109,8 @@ Fault
 - parent_uuid 父资产不存在（包括资产不可见）： `code = 12, message = "invalid parent_uuid"`
 - 父资产回环（父资产是自己，或者是孙子）：`code = 30, message = "making loop"`
 - 只能修改空闲资产： `code = 31, message = "asset is not idle"`
+- 子资产和父资产部门不同：`code = 32, message = "different departments between parent&child"`
+- 父不为空，且自己或父亲为非distinct：`code = 33, message = "build tree on non-distinct asset"`
 
 
 #### /asset/search

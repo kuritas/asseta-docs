@@ -221,9 +221,11 @@ Fault
 
 资产清退
 
-资产状态变为 RETIRED
+资产状态变为 RETIRED，直接子资产的父亲变为空。
 
-权限：资产管理员，且清退的资产不能处于 RETIRED / DELETED 状态，并且资产管理员可以管理资产。
+清退的资产不能处于 RETIRED / DELETED 状态。
+
+权限：资产管理员，且并且资产管理员可以管理资产。
 
 
 ```json
@@ -242,7 +244,7 @@ Success
     ],
     "fail_list": [
         "",
-    ],
+    ],//No access or has retired or deleted
 }
 Fault
 {

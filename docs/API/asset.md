@@ -65,6 +65,7 @@ Fault
 - 部门不存在： `code = 10, message = "invalid department"`
 - 类别不存在： `code = 11, message = "invalid category"`
 - 子资产和父资产部门不同：`code = 30, message = "different departments between parent&child"`
+- 数量型资产建树：`code = 31, message = "build tree on non-distinct asset"`
 
 #### /asset/modify
 

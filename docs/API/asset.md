@@ -86,6 +86,8 @@ upload_img 为 True 时，会返回 url。这个 url 必须通过 put 访问，1
 	"description": "", // 0 <= len <= 1024
 	"category_uuid": "",
 	"parent_uuid": "", // "" to make root, not given to keep the same
+	"count": number, // 1-32768
+	"value": value,  // positive, <= 2147483647
 	"upload_img": boolean,
 }
 Success
@@ -108,6 +110,7 @@ Fault
 - asset_uuid 本资产不存在（包括资产不可见）： `code = 10, message = "invalid asset_uuid"`
 - 类别不存在： `code = 11, message = "invalid category"`
 - parent_uuid 父资产不存在（包括资产不可见）： `code = 12, message = "invalid parent_uuid"`
+- 数量或价值非法： `code = 13, message = "invalid count or value"`
 - 父资产回环（父资产是自己，或者是孙子）：`code = 30, message = "making loop"`
 - 只能修改空闲资产： `code = 31, message = "asset is not idle"`
 - 子资产和父资产部门不同：`code = 32, message = "different departments between parent&child"`

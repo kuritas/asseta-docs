@@ -48,6 +48,11 @@ markdown_extensions:
 
 nav:
     - 介绍: index.md
+    - 需求:
+        - 需求列表: requirement/requirement.md
+        - 用例图: requirement/usecase.md
+        - 工单列表: requirement/ticket.md
+        - 操作记录: requirement/record.md
     - API:
         - API/index.md
         - User: API/user.md
@@ -64,7 +69,3 @@ nav:
         - git/index.md
     - 后端:
         - Models: backend/models.md
-    - 需求:
-        - 需求列表: requirement/requirement.md
-        - 工单列表: requirement/ticket.md
-        - 操作记录: requirement/record.md

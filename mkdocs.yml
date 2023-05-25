@@ -68,4 +68,5 @@ nav:
     - git规范:
         - git/index.md
     - 后端:
+        - Apps: backend/apps.md
         - Models: backend/models.md

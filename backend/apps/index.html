@@ -868,45 +868,55 @@
 
 
 <h1 id="app">后端 app 设计<a class="headerlink" href="#app" title="Permanent link">&para;</a></h1>
-<p>后端采用 Django 框架，包含以下 app：
-- core
-- asset
-- ticket
-- record
-- exlink
-- scheduler</p>
+<p>后端采用 Django 框架，包含以下 app：</p>
+<ul>
+<li>core</li>
+<li>asset</li>
+<li>ticket</li>
+<li>record</li>
+<li>exlink</li>
+<li>scheduler</li>
+</ul>
 <h2 id="core">core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
-<p>核心 app，包含以下功能：
-- 用户操作
-  - 用户登录、登出
-  - 更改密码
-  - 用户增删改查
-  - 权限控制
-- 部门操作
-  - 部门增删改查
-  - 部门成员增删查
-- 飞书
-  - 飞书绑定
-  - 飞书登录</p>
+<p>核心 app，包含以下功能：</p>
+<ul>
+<li>用户操作</li>
+<li>用户登录、登出</li>
+<li>更改密码</li>
+<li>用户增删改查</li>
+<li>权限控制</li>
+<li>部门操作</li>
+<li>部门增删改查</li>
+<li>部门成员增删查</li>
+<li>飞书</li>
+<li>飞书绑定</li>
+<li>飞书登录</li>
+</ul>
 <h2 id="asset">asset<a class="headerlink" href="#asset" title="Permanent link">&para;</a></h2>
-<p>资产管理 app，包含以下功能：
-- 资产管理
-  - 资产增删改查
-  - 批量导入
-  - 资产清退
-  - 资产统计
-- 资产类别管理
-  - 增删改查
-- 资产告警
-  - 告警配置增删查
-  - 告警通知</p>
+<p>资产管理 app，包含以下功能：</p>
+<ul>
+<li>资产管理</li>
+<li>资产增删改查</li>
+<li>批量导入</li>
+<li>资产清退</li>
+<li>资产统计</li>
+<li>资产类别管理</li>
+<li>增删改查</li>
+<li>资产告警</li>
+<li>告警配置增删查</li>
+<li>告警通知</li>
+</ul>
 <h2 id="ticket">ticket<a class="headerlink" href="#ticket" title="Permanent link">&para;</a></h2>
-<p>工单管理 app，包含以下功能：
-- 工单管理
-  - 工单增删改查
-    - 申请工单
-    - 维保工单
-    - 退还工单</p>
+<p>工单管理 app，包含以下功能：</p>
+<ul>
+<li>工单管理</li>
+<li>工单增删改查<ul>
+<li>申请工单</li>
+<li>维保工单</li>
+<li>退还工单</li>
+</ul>
+</li>
+</ul>
 <h2 id="record">record<a class="headerlink" href="#record" title="Permanent link">&para;</a></h2>
 <p>操作记录 app，自动生成概括、精细两级的日志，并且静态存储为字符串，系统状态发生更改后仍然具有意义。</p>
 <h2 id="exlink">exlink<a class="headerlink" href="#exlink" title="Permanent link">&para;</a></h2>

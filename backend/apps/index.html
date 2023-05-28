@@ -235,6 +235,22 @@
   
 
       
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../frontend/tech/" class="md-tabs__link">
+        前端
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -341,6 +357,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../requirement/story/" class="md-nav__link">
+        用户故事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../requirement/usecase/" class="md-nav__link">
         用例图
       </a>
@@ -355,22 +385,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../requirement/ticket/" class="md-nav__link">
-        工单列表
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../requirement/record/" class="md-nav__link">
-        操作记录
+      <a href="../../requirement/swimlane/" class="md-nav__link">
+        泳道图
       </a>
     </li>
   
@@ -660,6 +676,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -772,6 +792,87 @@
     <li class="md-nav__item">
       <a href="../models/" class="md-nav__link">
         Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirement/ticket/" class="md-nav__link">
+        工单列表
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirement/record/" class="md-nav__link">
+        操作记录
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          前端
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          前端
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/tech/" class="md-nav__link">
+        前端技术选型以及相关设计
       </a>
     </li>
   
@@ -922,7 +1023,13 @@
 <h2 id="exlink">exlink<a class="headerlink" href="#exlink" title="Permanent link">&para;</a></h2>
 <p>处理用户页的外部链接 app。</p>
 <h2 id="scheduler">scheduler<a class="headerlink" href="#scheduler" title="Permanent link">&para;</a></h2>
-<p>每天 4am 运行资产价值折旧和自动清退。</p>
+<p>使用 django-apscheduler ，在每个整点进行如下定时任务（以下时间均为 UTC 时间）：</p>
+<ul>
+<li>扫描所有资产。如果最后一次更新的日期与当前日期不同，则将其剩余保质期减去二者的差。并根据总价值、总保质期和剩余保质期线性插值求出其剩余价值。</li>
+<li>扫描所有部门。如果没有历史记录或最后一次历史记录的日期与当前日期不同，则计算其资产总价值并新建一条历史记录。</li>
+<li>扫描所有警告配置，如果符合条件则生成一条警告。</li>
+</ul>
+<p>这样，即使数据库或者服务器长时间出现故障，也不会导致后续对资产剩余保质期的维护出现问题。在正常情况下，所有资产的保质期将统一于每天 0:00 UTC （即 8:00 CST ）更新。</p>
 
 
 
